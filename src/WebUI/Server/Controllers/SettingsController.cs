@@ -1,5 +1,8 @@
 ﻿using Common;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IO;
+using WebUI.Shared;
 
 namespace WebUI.Server.Controllers
 {
@@ -17,13 +20,10 @@ namespace WebUI.Server.Controllers
 		[HttpGet]
 		public IActionResult Index()
 		{
-			_config.Peloton.Email = "******" + _config.Peloton.Email.Substring(6);
-			_config.Peloton.Password = "******";
+			var response = SettingsGetResponse.Convert(_config);
+			response.SettingsFilePath = Path.Join(Environment.CurrentDirectory, "configuration.local.json");
 
-			_config.Garmin.Email = "******" + _config.Peloton.Email.Substring(6);
-			_config.Garmin.Password = "******";
-
-			return Ok(_config);
+			return Ok(response);
 		}
 	}
 }

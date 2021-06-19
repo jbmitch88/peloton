@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Peloton;
 using Serilog;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using WebUI.Shared;
 
@@ -30,7 +31,6 @@ namespace WebUI.Server.Controllers
 		[HttpPost]
 		public async Task<IActionResult> PostAsync([FromBody] SyncPostRequest request)
 		{
-			Log.Information("Reached the SyncController.");
 			var response = new SyncPostResponse();
 
 			if (request.NumWorkouts <= 0)
@@ -44,6 +44,7 @@ namespace WebUI.Server.Controllers
 				await _pelotonService.DownloadLatestWorkoutDataAsync();
 			} catch (Exception e)
 			{
+				Log.Error(e, "Failed to download latest workouts from Peloton.");
 				response.SyncSuccess = false;
 				response.PelotonDownloadSuccess = false;
 				response.Errors.Add(new ErrorResponse() { Message = "Failed to download workouts from Peloton. Check logs for more details." });
@@ -57,12 +58,14 @@ namespace WebUI.Server.Controllers
 				_converter.Convert();
 			} catch (Exception e)
 			{
+				Log.Error(e, "Failed to convert workouts.");
 				response.SyncSuccess = false;
 				response.ConverToFitSuccess = false;
 				response.Errors.Add(new ErrorResponse() { Message = "Failed to convert workouts to FIT format. Check logs for more details." });
 				return Ok(response);
 			}
 			response.ConverToFitSuccess = true;
+			response.OutputPath = Path.GetFullPath(_config.App.OutputDirectory);
 
 			try
 			{

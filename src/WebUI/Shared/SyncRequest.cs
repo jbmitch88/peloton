@@ -21,6 +21,7 @@ namespace WebUI.Shared
 		public bool PelotonDownloadSuccess { get; set; }
 		public bool? ConverToFitSuccess { get; set; }
 		public bool? UploadToGarminSuccess { get; set; }
+		public string OutputPath { get; set; }
 		public ICollection<ErrorResponse> Errors { get; set; }
 	}
 }

@@ -2,6 +2,7 @@
 @inject HttpClient Http
 
 <h3>Settings</h3>
+<em>Loaded from: @settings?.SettingsFilePath</em>
 
 @if (settings == null)
 {
@@ -18,27 +19,27 @@ else
         </thead>
         <tbody>
             <tr>
-                <td>Output Directory:</td>
+                <td>Output Directory</td>
                 <td>@settings.App.OutputDirectory</td>
             </tr>
             <tr>
-                <td>Working Directory:</td>
+                <td>Working Directory</td>
                 <td>@settings.App.WorkingDirectory</td>
             </tr>
             <tr>
-                <td>Sync History Db Path:</td>
+                <td>Sync History Db Path</td>
                 <td>@settings.App.SyncHistoryDbPath</td>
             </tr>
             <tr>
-                <td>Enable Polling:</td>
+                <td>Enable Polling</td>
                 <td>@settings.App.EnablePolling</td>
             </tr>
             <tr>
-                <td>Polling Interval Seconds:</td>
+                <td>Polling Interval Seconds</td>
                 <td>@settings.App.PollingIntervalSeconds</td>
             </tr>
             <tr>
-                <td>Python and GUpload Installed:</td>
+                <td>Python and GUpload Installed</td>
                 <td>@settings.App.PythonAndGUploadInstalled</td>
             </tr>
         </tbody>
@@ -53,27 +54,27 @@ else
         </thead>
         <tbody>
             <tr>
-                <td>Fit:</td>
+                <td>FIT</td>
                 <td>@settings.Format.Fit</td>
             </tr>
             <tr>
-                <td>Json:</td>
+                <td>JSON</td>
                 <td>@settings.Format.Json</td>
             </tr>
             <tr>
-                <td>TCX:</td>
+                <td>TCX</td>
                 <td>@settings.Format.Tcx</td>
             </tr>
             <tr>
-                <td>Save Local Copy:</td>
+                <td>Save Local Copy</td>
                 <td>@settings.Format.SaveLocalCopy</td>
             </tr>
             <tr>
-                <td>Include Time in HR Zones:</td>
+                <td>Include Time in HR Zones</td>
                 <td>@settings.Format.IncludeTimeInHRZones</td>
             </tr>
             <tr>
-                <td>Include Time in Power Zones:</td>
+                <td>Include Time in Power Zones</td>
                 <td>@settings.Format.IncludeTimeInPowerZones</td>
             </tr>
         </tbody>
@@ -88,20 +89,20 @@ else
         </thead>
         <tbody>
             <tr>
-                <td>Email:</td>
+                <td>Email</td>
                 <td>@settings.Peloton.Email</td>
             </tr>
             <tr>
-                <td>Password:</td>
+                <td>Password</td>
                 <td>@settings.Peloton.Password</td>
             </tr>
             <tr>
-                <td>Number of Workouts to Download:</td>
+                <td>Number of Workouts to Download</td>
                 <td>@settings.Peloton.NumWorkoutsToDownload</td>
             </tr>
             <tr>
-                <td>Excluded Workout Types:</td>
-                <td>@settings.Peloton.ExcludeWorkoutTypes</td>
+                <td>Excluded Workout Types</td>
+                <td>@String.Join(",", settings.Peloton.ExcludeWorkoutTypes)</td>
             </tr>
         </tbody>
     </table>
@@ -115,16 +116,73 @@ else
         </thead>
         <tbody>
             <tr>
-                <td>Email:</td>
+                <td>Email</td>
                 <td>@settings.Garmin.Email</td>
             </tr>
             <tr>
-                <td>Password:</td>
+                <td>Password</td>
                 <td>@settings.Garmin.Password</td>
             </tr>
             <tr>
-                <td>Format To Upload:</td>
+                <td>Format To Upload</td>
                 <td>@settings.Garmin.FormatToUpload</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Metrics Config</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Enabled</td>
+                <td>@settings.Observability.Prometheus.Enabled</td>
+            </tr>
+            <tr>
+                <td>Port</td>
+                <td>@settings.Observability.Prometheus.Port</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tracing Config</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Enabled</td>
+                <td>@settings.Observability.Jaeger.Enabled</td>
+            </tr>
+            <tr>
+                <td>Agent Host</td>
+                <td>@settings.Observability.Jaeger.AgentHost</td>
+            </tr>
+            <tr>
+                <td>Agent Port</td>
+                <td>@settings.Observability.Jaeger.AgentPort</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Developer Config</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>UserAgent</td>
+                <td>@settings.Developer.UserAgent</td>
             </tr>
         </tbody>
     </table>
