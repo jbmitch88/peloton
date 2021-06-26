@@ -11,7 +11,7 @@ namespace Peloton
 {
 	public interface IPelotonApi
 	{
-		Task InitAuthAsync(string overrideUserAgent);
+		Task InitAuthAsync();
 		Task<RecentWorkouts> GetWorkoutsAsync(int numWorkouts);
 		Task<JObject> GetWorkoutByIdAsync(string id);
 		Task<JObject> GetWorkoutSamplesByIdAsync(string id);
@@ -44,7 +44,7 @@ namespace Peloton
 			_observabilityEnabled = observabilityEnabled;
 		}
 
-		public async Task InitAuthAsync(string overrideUserAgent = null)
+		public async Task InitAuthAsync()
 		{
 			if (!string.IsNullOrEmpty(UserId) && !string.IsNullOrEmpty(SessionId))
 				return;
@@ -53,7 +53,7 @@ namespace Peloton
 			{
 				var response = await $"{AuthBaseUrl}"
 				.WithHeader("Accept-Language", "en-US")
-				.WithHeader("User-Agent", overrideUserAgent ?? "PostmanRuntime/7.26.10")
+				.WithHeader("User-Agent", "PostmanRuntime/7.26.10")
 				.ConfigureRequest((c) =>
 				{
 					c.BeforeCall = (FlurlCall call) =>

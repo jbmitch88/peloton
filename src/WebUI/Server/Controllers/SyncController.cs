@@ -69,7 +69,7 @@ namespace WebUI.Server.Controllers
 
 			try
 			{
-				_garminUploader.UploadToGarmin();
+				await _garminUploader.UploadToGarminAsync();
 			}
 			catch (GarminUploadException e) 
 			{
