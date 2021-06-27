@@ -129,8 +129,6 @@ namespace WebUI.Server
 				}				
 			});
 
-
-			// TODO: this probably called too early
 			var runtimeVersion = Environment.Version.ToString();
 			var os = Environment.OSVersion.Platform.ToString();
 			var osVersion = Environment.OSVersion.VersionString;
